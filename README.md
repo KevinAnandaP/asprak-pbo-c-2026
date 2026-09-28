@@ -1,16 +1,38 @@
-## Getting Started
+# AmBank"
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+Hai
+Hai Juga
 
-## Folder Structure
+---
 
-The workspace contains two folders by default, where:
+## TODO
+### 1. File `com.ambank.model.Card`
+- [ ] **TODO 1**: Atur semua access modifier atribut menjadi `private` (Security by Encapsulation). JANGAN buat method `getPin()`.
+- [ ] **TODO 2**: Lengkapi constructor `Card(String nameHolder, String pin)` dengan validasi PIN tepat 6 digit angka (`\\d{6}`).
+- [ ] **TODO 3**: Implementasikan method `verifyPin(String inputPin)`:
+  - Cek apakah kartu terblokir.
+  - Reset `failedAttempts` jika PIN benar.
+  - Naikkan `failedAttempts` jika salah, dan otomatis ubah `isBlocked = true` jika salah 3 kali berturut-turut.
+- [ ] **TODO 4**: Implementasikan method `changePin(String oldPin, String newPin)`.
+- [ ] **TODO 5**: Implementasikan data masking pada `getMaskedCardNumber()` (12 digit pertama disensor `****-****-****-XXXX`).
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+### 2. File `com.ambank.model.Account`
+- [ ] **TODO 6**: Ubah `nameHolder` menjadi `private`, buat getter dan setter dengan validasi nama tidak boleh kosong.
+- [ ] **TODO 7**: Tambahkan atribut `private Card card;` dan getter `getCard()`.
+- [ ] **TODO 8**: Implementasikan method `issueCard(String pin)` untuk menginstansiasi objek `Card` dan menyimpannya ke `this.card`.
+- [ ] **TODO 9**: Pahami method `getTransferLimit()` yang disiapkan untuk di-override oleh kelas turunan.
+- [ ] **TODO 10**: Perbarui method `displayAccount()` agar mencetak informasi kartu ATM (Nomor masked dan status AKTIF/TERBLOKIR).
 
-## Dependency Management
+### 3. File `com.ambank.model.BusinessAccount`
+- [ ] **TODO 11**: Tambahkan konstanta `BUSINESS_TRANSFER_LIMIT = 50000000;`.
+- [ ] **TODO 12**: Lengkapi constructor overloading `BusinessAccount(String nameHolder, String NPWP, String noSK)` menggunakan `super(nameHolder)`.
+- [ ] **TODO 13**: Sediakan getter dan setter untuk atribut `NPWP` dan `noSK`.
+- [ ] **TODO 14**: Lakukan `@Override` pada method `getTransferLimit()` agar mengembalikan `BUSINESS_TRANSFER_LIMIT`.
+- [ ] **TODO 15**: Lakukan `@Override` pada method `displayAccount()`: panggil `super.displayAccount()`, lalu tampilkan informasi NPWP dan Nomor SK.
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### 4. File `com.ambank.app.Transaction`
+- [ ] **TODO 16**: Ubah validasi batas transfer pada `makeTransaction()` agar menggunakan pemanggilan dinamis `sender.getTransferLimit()` (menerapkan Polimorfisme).
+- [ ] **TODO 17**: Implementasikan penarikan tunai pada method `tarikUang(Account account, int amount)`.
+- [ ] **TODO 18**: Implementasikan autentikasi PIN pada method `tarikUang(Account account, int amount, String pin)`.
 
-Kepin
+---
