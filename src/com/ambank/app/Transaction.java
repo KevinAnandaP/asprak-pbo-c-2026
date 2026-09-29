@@ -18,15 +18,22 @@ public class Transaction {
     }
 
     public static void initTransactionList() {
-        if(transactions == null) {
+        if (transactions == null) {
             transactions = new ArrayList<Transaction>();
         }
     }
 
     public static boolean makeTransaction(Account sender, Account receiver, int amount) {
+        initTransactionList();
+
+        // Validasi keamanan: parameter null, amount tidak valid, atau transfer ke akun sendiri
+        if (sender == null || receiver == null || sender == receiver || amount <= 0) {
+            return false;
+        }
+
         if (((sender.getSaldo() - Account.MINIMUM_SALDO) >= amount) || sender == AMBANK_ACCOUNT) {
-            // TODO 16: Ganti batas limit transfer dengan sender.getTransferLimit() agar polimorfisme aktif
-            if ((amount > 10000 && amount <= sender.getTransferLimit()) || sender == AMBANK_ACCOUNT) {
+            // TODO 16: Ganti Account.TRANSFER_LIMIT dengan sender.getTransferLimit() agar polimorfisme aktif
+            if ((amount > 10000 && amount <= Account.TRANSFER_LIMIT) || sender == AMBANK_ACCOUNT) {
                 transactions.add(new Transaction(sender, receiver, amount));
                 return true;
             }
@@ -36,11 +43,16 @@ public class Transaction {
     }
 
     public static int getSaldoFromAccount(Account account) {
+        initTransactionList();
+        if (account == null) {
+            return 0;
+        }
+
         int saldo = 0;
         for (Transaction transaction : transactions) {
-            if(transaction.senderAccount == account) {
+            if (transaction.senderAccount == account) {
                 saldo -= transaction.amount;
-            } else if(transaction.receiverAccount == account) {
+            } else if (transaction.receiverAccount == account) {
                 saldo += transaction.amount;
             }
         }
@@ -48,19 +60,20 @@ public class Transaction {
     }
 
     public static void setorUang(Account account, int amount) {
-        Transaction.makeTransaction(AMBANK_ACCOUNT, account, amount);
+        if (amount > 0) {
+            Transaction.makeTransaction(AMBANK_ACCOUNT, account, amount);
+        }
     }
 
     // TODO 17: Tarik tunai ke AMBANK_ACCOUNT menggunakan makeTransaction
     public static boolean tarikUang(Account account, int amount) {
-        return Transaction.makeTransaction(account, AMBANK_ACCOUNT, amount);
+        // TODO 17: implementasikan tarik tunai di sini
+        return false;
     }
 
     // TODO 18: Tarik tunai via ATM (validasi kartu & verifikasi PIN)
     public static boolean tarikUang(Account account, int amount, String pin) {
-        if (account.getCard() != null && account.getCard().verifyPin(pin)) {
-            return tarikUang(account, amount);
-        }
+        // TODO 18: implementasikan verifikasi kartu dan PIN sebelum tarik tunai
         return false;
     }
 }

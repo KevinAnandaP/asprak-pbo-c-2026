@@ -16,11 +16,12 @@ public class Account {
     private Card card;
 
     public Account(String nameHolder) {
-        this.nameHolder = nameHolder;
+        // Validasi: cegah nama null atau kosong
+        this.nameHolder = (nameHolder != null && !nameHolder.trim().isEmpty()) ? nameHolder : "NASABAH_AMBANK";
         this.rekening = UUID.randomUUID().toString();
     }
 
-    // TODO 8: Buat objek Card baru dan simpan ke this.card
+    // TODO 8: Buat objek Card baru dan simpan ke this.card (validasi jika sudah punya kartu)
     public void issueCard(String pin) {
         // TODO 8: implementasikan issueCard di sini
     }
@@ -35,9 +36,6 @@ public class Account {
 
     public void setNameHolder(String nameHolder) {
         // TODO 6: validasi nama tidak boleh null atau kosong
-        if (nameHolder != null && !nameHolder.trim().isEmpty()) {
-            this.nameHolder = nameHolder;
-        }
     }
 
     public String getRekening() {
@@ -50,7 +48,8 @@ public class Account {
 
     // TODO 9: Return TRANSFER_LIMIT (disiapkan untuk di-override di BusinessAccount)
     public int getTransferLimit() {
-        return TRANSFER_LIMIT;
+        // TODO 9: kembalikan TRANSFER_LIMIT
+        return 0;
     }
 
     // TODO 10: Tampilkan info kartu jika ada (nomor tersensor)
@@ -61,7 +60,7 @@ public class Account {
         System.out.println("Rekening : " + this.rekening);
         System.out.println("Saldo    : " + this.getSaldo());
 
-        // TODO 10: jika this.card != null, cetak nomor kartu
+        // TODO 10: jika this.card != null, cetak nomor kartu di sini
 
         System.out.println("================================");
     }

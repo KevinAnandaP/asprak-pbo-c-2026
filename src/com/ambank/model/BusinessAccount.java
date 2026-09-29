@@ -14,31 +14,33 @@ public class BusinessAccount extends Account {
     // TODO 12: Constructor overloading dengan super(nameHolder) serta inisialisasi NPWP dan noSK
     public BusinessAccount(String nameHolder, String NPWP, String noSK) {
         super(nameHolder);
-        this.NPWP = NPWP;
-        this.noSK = noSK;
+        // TODO 12: inisialisasi atribut NPWP dan noSK di sini
     }
 
     // TODO 13: Sediakan getter dan setter untuk NPWP dan noSK
     public String getNPWP() {
-        return NPWP;
+        // TODO 13: return NPWP
+        return null;
     }
 
     public void setNPWP(String NPWP) {
-        this.NPWP = NPWP;
+        // TODO 13: set NPWP
     }
 
     public String getNoSK() {
-        return noSK;
+        // TODO 13: return noSK
+        return null;
     }
 
     public void setNoSK(String noSK) {
-        this.noSK = noSK;
+        // TODO 13: set noSK
     }
 
     // TODO 14: Override getTransferLimit() agar me-return BUSINESS_TRANSFER_LIMIT
     @Override
     public int getTransferLimit() {
-        return BUSINESS_TRANSFER_LIMIT;
+        // TODO 14: kembalikan BUSINESS_TRANSFER_LIMIT
+        return super.getTransferLimit();
     }
 
     // TODO 15: Override displayAccount() panggil super.displayAccount() lalu cetak NPWP dan noSK

@@ -1,9 +1,9 @@
 package com.ambank.model;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class Card {
-    // TODO 1: Ubah semua atribut menjadi private (enkapsulasi), JANGAN buat getPin()
+    // TODO 1: Atribut dibuat private (enkapsulasi), JANGAN buat getPin()
     private String nameHolder;
     private String cardNumber;
     private String pin;
@@ -15,14 +15,16 @@ public class Card {
     // TODO 2: Validasi PIN harus 6 digit angka, jika tidak valid set default "123456"
     public Card(String nameHolder, String pin) {
         this.nameHolder = nameHolder;
+        // TODO 2: lakukan validasi format PIN di sini (6 digit angka)
         this.pin = pin;
         this.cardNumber = generateCardNumber();
         this.isBlocked = false;
         this.failedAttempts = 0;
     }
 
+    // Menggunakan SecureRandom untuk keamanan nomor kartu (CWE-330 fix)
     private String generateCardNumber() {
-        Random random = new Random();
+        SecureRandom random = new SecureRandom();
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 16; i++) {
             sb.append(random.nextInt(10));
@@ -32,16 +34,19 @@ public class Card {
 
     // TODO 3: Verifikasi PIN (cek blokir, reset failedAttempts jika benar, tambah jika salah, auto-blokir jika salah 3x)
     public boolean verifyPin(String inputPin) {
+        // TODO 3: implementasikan verifikasi PIN di sini
         return false;
     }
 
     // TODO 4: Ganti PIN (verifikasi oldPin dulu, lalu cek format newPin 6 digit angka)
     public boolean changePin(String oldPin, String newPin) {
+        // TODO 4: implementasikan ganti PIN di sini
         return false;
     }
 
     // TODO 5: Sensor nomor kartu, tampilkan 4 digit terakhir saja (contoh: ****-****-****-1234)
     public String getMaskedCardNumber() {
+        // TODO 5: implementasikan masking nomor kartu di sini
         return "****-****-****-****";
     }
 
